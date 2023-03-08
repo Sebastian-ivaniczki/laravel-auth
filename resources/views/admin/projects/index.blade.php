@@ -26,8 +26,10 @@
                     <td>{{ $project->created_at }}</td>
                     <td>{{ $project->updated_at }}</td>
                     <td class="d-flex justify-content-end">
-                        <a class="btn btn-small btn-primary me-2"
+                        <a class="btn btn-small btn-primary"
                             href="{{ route('admin.projects.show', $project->id) }}">details</a>
+                        <a class="btn btn-small btn btn-warning mx-2"
+                            href="{{ route('admin.projects.edit', $project->id) }}">Edit</a>
                         <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
                             class="delete-form">
                             @csrf
