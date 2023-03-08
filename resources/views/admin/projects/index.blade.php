@@ -3,8 +3,9 @@
 @section('title', 'projects')
 
 @section('content')
-    <header>
-        <h1 class="my-5 text-center">Projects</h1>
+    <header class="d-flex justify-content-between my-5">
+        <h1>Projects</h1>
+        <a class="btn btn-success" href="{{ route('admin.projects.create') }}">Crate</a>
     </header>
 
     <table class="table table-dark table-striped">

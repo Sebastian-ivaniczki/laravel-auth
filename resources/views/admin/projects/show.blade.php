@@ -15,6 +15,11 @@
         <p>{{ $project->content }}</p>
     </div>
     <div class="d-flex justify-content-end">
-        <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}">Back</a>
+        <a class="btn btn-secondary me-2" href="{{ route('admin.projects.index') }}">Back</a>
+        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete-form">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 @endsection
