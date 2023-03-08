@@ -24,8 +24,16 @@
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->created_at }}</td>
                     <td>{{ $project->updated_at }}</td>
-                    <td><a class="btn btn-small btn-primary"
-                            href="{{ route('admin.projects.show', $project->id) }}">details</a></td>
+                    <td class="d-flex justify-content-end">
+                        <a class="btn btn-small btn-primary me-2"
+                            href="{{ route('admin.projects.show', $project->id) }}">details</a>
+                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
+                            class="delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
@@ -36,4 +44,8 @@
 
         </tbody>
     </table>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/dele-confirm.js')
 @endsection
