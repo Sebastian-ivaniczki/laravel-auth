@@ -65,9 +65,18 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $data = $request->all();
+
+
+
+        $data['slug'] = Str::slug($data['title'], '-');
+
+
+        $project->update($data);
+
+        return to_route('admin.projects.show', $project->id);
     }
 
     /**
