@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -32,18 +33,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->all();
-
-
 
         $data['slug'] = Str::slug($data['title'], '-');
 
+
         $new_project = new Project();
+        if (array_key_exists('image', $data)) {
+            $img_path = Storage::put('projects', $data['image']);
+            $data['image'] =  $img_path;
+        }
         $new_project->fill($data);
 
         $new_project->save();
 
-        return  to_route('admin.projects.index');
+        return  to_route('admin.projects.show', $new_project->id);
     }
 
     /**
