@@ -78,10 +78,20 @@ class ProjectController extends Controller
 
         $data['slug'] = Str::slug($data['title'], '-');
 
-
+        // Upload files
+        if (array_key_exists('image', $data)) {
+            if ($project->image) {
+                Storage::delete($project->image);
+            }
+            $img_path = Storage::put('projects', $data['image']);
+            $data['image'] =  $img_path;
+        }
+        //update
         $project->update($data);
 
-        return to_route('admin.projects.show', $project->id);
+        return to_route('admin.projects.show', $project->id)
+            ->with('type', 'success')
+            ->with('message', 'sucses change');;
     }
 
     /**
