@@ -10,7 +10,7 @@
 
     <div class="clearfix">
         @if ($project->image)
-            <img class="float-start me-3" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->slug }}">
+            <img class="float-start me-3 post-img" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->slug }}">
         @endif
         <p>{{ $project->content }}</p>
     </div>
